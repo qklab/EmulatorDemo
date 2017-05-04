@@ -1,14 +1,58 @@
 language: java
-jdk: oraclejdk8
 sudo: false
-#env:
-#    global:
-#        - LOCAL_WORKSPACE=./SinarmasBank
-script: 
- - mvn clean compile assembly:single
- - echo "$TRAVIS_BUILD_DIR"
- - java -cp ".:$TRAVIS_BUILD_DIR/lib/*" -jar $TRAVIS_BUILD_DIR/target/EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
-#script: cd SinarmasBank && mvn clean verify
-#after_script: cd SinarmasBank && java -classpath .;%local_workspace%\lib\*;%local_workspace%\bin APITesting.Test
-# - java -classpath ".:$TRAVIS_BUILD_DIR/SinarmasBank/*:$TRAVIS_BUILD_DIR/SinarmasBank/bin:$TRAVIS_BUILD_DIR/SinarmasBank/lib/selenium-server-standalone-2.53.1.jar" APITesting.Test
- 
+jdk: oraclejdk8
+
+before_install:
+  - nvm install 6.9.5
+  - node --version
+  - npm install -g appium
+  - npm install -g appium-doctor
+
+script:
+  - android list sdk --all
+
+language: android
+android:
+  components:
+    # Uncomment the lines below if you want to
+    # use the latest revision of Android SDK Tools
+    # - platform-tools
+    # - tools
+
+    # The BuildTools version used by your project
+    - build-tools-21.1.2
+
+    # The SDK version used to compile your project
+    - android-21
+
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-21
+    
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-21
+  licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
+# Emulator Management: Create, Start and Wait
+before_script:
+  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
+script:
+  - appium-doctor
+  - adb devices
+  - cd scripts
+  - java -jar Runner.jar
+  - ls
+  - adb -s emulator-5554 install app_release.apk
+  - ls
+  - mvn clean compile assembly:single
+  - java jar $TRAVIS_BUILD_DIR/target/EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
