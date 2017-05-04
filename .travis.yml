@@ -7,7 +7,7 @@ sudo: false
 script: 
  - mvn clean compile assembly:single
  - echo "$TRAVIS_BUILD_DIR"
- - java -cp ".:$TRAVIS_BUILD_DIR/SinarmasBank/lib/selenium-server-standalone-2.53.1.jar" -jar $TRAVIS_BUILD_DIR/SinarmasBank/target/SinarmasBank-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+ - java -cp ".:$TRAVIS_BUILD_DIR/lib/*" -jar $TRAVIS_BUILD_DIR/target/EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 #script: cd SinarmasBank && mvn clean verify
 #after_script: cd SinarmasBank && java -classpath .;%local_workspace%\lib\*;%local_workspace%\bin APITesting.Test
 # - java -classpath ".:$TRAVIS_BUILD_DIR/SinarmasBank/*:$TRAVIS_BUILD_DIR/SinarmasBank/bin:$TRAVIS_BUILD_DIR/SinarmasBank/lib/selenium-server-standalone-2.53.1.jar" APITesting.Test
