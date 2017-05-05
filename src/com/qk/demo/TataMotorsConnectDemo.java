@@ -45,7 +45,7 @@ public class TataMotorsConnectDemo {
 
 	private static AndroidDriver driver;
 	private static String url = "http://127.0.0.1:4731/wd/hub";
-
+    
 
 //	private static BtmWebServiceProxy pushRA = new BtmWebServiceProxy();
 	private static LogQADatabase logqa = new LogQADatabase();
