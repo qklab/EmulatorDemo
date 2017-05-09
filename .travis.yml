@@ -49,10 +49,11 @@ before_script:
 script:
   - appium-doctor
   - adb devices
-  - cd scripts
-  - java -jar Runner.jar
+  - cd apk
   - ls
-  - adb -s emulator-5554 install app_release.apk
+  - adb -s emulator-5554 install Tata Motors Connect_v3.3.1_apkpure.com.apk
   - ls
   - mvn clean compile assembly:single
-  - java -jar $TRAVIS_BUILD_DIR/target/EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+  - cd target
+  - ls
+  - java -jar EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
