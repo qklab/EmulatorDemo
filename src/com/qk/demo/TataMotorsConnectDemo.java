@@ -1,6 +1,10 @@
 package com.qk.demo;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.AndroidServerFlag;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -45,7 +49,7 @@ public class TataMotorsConnectDemo {
 
 	private static AndroidDriver driver;
 	private static String url = "http://127.0.0.1:4723/wd/hub";
-    
+	  
 
 //	private static BtmWebServiceProxy pushRA = new BtmWebServiceProxy();
 	private static LogQADatabase logqa = new LogQADatabase();
@@ -221,14 +225,14 @@ public class TataMotorsConnectDemo {
 
 		if((currentTimeSec - prevTimeSec < 0) || (currentTimeSec - prevTimeSec >= 00)) //3500
 		{
-			TaskKill.stopappium();
+			//TaskKill.stopappium();
 			try{Thread.sleep(2000);
 			FileUtils.cleanDirectory(new File("C:/Users/quality/AppData/Local/Temp/"));}
 			catch(Exception e)
 			{System.out.println("Temp files are not available.");}
 			try
 			{
-				//TaskKill.startappium();
+				//TaskKill.startappium();                   
 				Thread.sleep(5000);
 				XMLWriter.runFrequency(appcode, currentTimeSec);
 				DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -259,6 +263,8 @@ public class TataMotorsConnectDemo {
 		}
 
 	}
+	
+	
 
 	@Test
 	public void test01Home_Page() throws Exception
