@@ -48,7 +48,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TataMotorsConnectDemo {
 
 	private static AndroidDriver driver;
-	private static String url = "http://0.0.0.0:4723/wd/hub";
+	private static String url = "http://127.0.0.1:4723/wd/hub";
 	  
 
 //	private static BtmWebServiceProxy pushRA = new BtmWebServiceProxy();
