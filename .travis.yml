@@ -54,7 +54,6 @@ script:
   - ls
   - adb -s emulator-5554 install Tata_Motors_Connect_v3.3.1_apkpure.com.apk
   - cd ../
-  - appium
   - cd target
   - ls
   - java -jar EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
