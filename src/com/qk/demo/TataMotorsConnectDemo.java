@@ -48,7 +48,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TataMotorsConnectDemo {
 
 	private static AndroidDriver driver;
-	private static String url = "http://127.0.0.1:4723/wd/hub";
+	private static String url = "http://0.0.0.0:4723/wd/hub";
 	  
 
 //	private static BtmWebServiceProxy pushRA = new BtmWebServiceProxy();
@@ -72,169 +72,15 @@ public class TataMotorsConnectDemo {
 	@Rule
 	public TestName name = new TestName();
 
-	public static void autoScreenshotcapture(String pagename,String ApplicationName)
-	{	
-		File screenshot =  ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-		String path;
-		String temp_path;
-
-		Calendar now = Calendar.getInstance();
-		int hour = now.get(Calendar.HOUR_OF_DAY);
-		int minute = now.get(Calendar.MINUTE);
-		int second = now.get(Calendar.SECOND);
-
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy");
-		SimpleDateFormat sd1 = new SimpleDateFormat("MMM");
-		SimpleDateFormat sd2 = new SimpleDateFormat("dd");
-		Calendar c = Calendar.getInstance();
-
-		path = "C:\\Logs\\" + sd.format(c.getTime()) + "\\"
-				+ sd1.format(c.getTime()) + "\\" + sd2.format(c.getTime())
-				+ "\\" + ApplicationName;
-
-		String username = System.getProperty("user.name");
-
-		temp_path = "D:\\"+username+"\\temp_snapshot";
-
-		File tempDir = new File(temp_path);
-		if (!tempDir.exists()) {
-			System.out.println("creating directory: " + temp_path);
-			boolean result = false;
-			try {
-				tempDir.mkdirs();
-				result = true;
-			} catch (SecurityException localSecurityException) {
-			}
-			if (result) {
-				System.out.println("DIR's created");
-			}
-		}
-
-		File theDir = new File(path);
-		if (!theDir.exists()) {
-			System.out.println("creating directory: " + path);
-			boolean result = false;
-			try {
-				theDir.mkdirs();
-				result = true;
-			} catch (SecurityException localSecurityException) {
-			}
-			if (result) {
-				System.out.println("DIR's created");
-			}
-		}
-		try {
-			FileUtils.copyFile(screenshot, new File(path+"/"+pagename+"_"+hour+"_"+minute+"_"+second+"_auto.jpg"));
-			FileUtils.copyFile(screenshot, new File(temp_path+"/snapshot.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void screenshotcapture(String pagename,String ApplicationName)
-	{	
-		File screenshot =  ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-		String path;
-
-		Calendar now = Calendar.getInstance();
-		int hour = now.get(Calendar.HOUR_OF_DAY);
-		int minute = now.get(Calendar.MINUTE);
-		int second = now.get(Calendar.SECOND);
-
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy");
-		SimpleDateFormat sd1 = new SimpleDateFormat("MMM");
-		SimpleDateFormat sd2 = new SimpleDateFormat("dd");
-		Calendar c = Calendar.getInstance();
-
-		path = "C:\\Logs\\" + sd.format(c.getTime()) + "\\"
-				+ sd1.format(c.getTime()) + "\\" + sd2.format(c.getTime())
-				+ "\\" + ApplicationName;
-
-		File theDir = new File(path);
-		if (!theDir.exists()) {
-			System.out.println("creating directory: " + path);
-			boolean result = false;
-			try {
-				theDir.mkdirs();
-				result = true;
-			} catch (SecurityException localSecurityException) {
-			}
-			if(result) {
-				System.out.println("DIR's created");
-			}
-		}
-		try {
-			FileUtils.copyFile(screenshot, new File(path+"/"+pagename+"_"+hour+"_"+minute+"_"+second+".jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	@BeforeClass
 	public static void setUpTest() throws Exception
 	{
-		BufferedReader freq;
-		String prevTime;
-		String freqpath;
-		int prevTimeSec=0;
-		//********Application Frequency wise text file**************//
-		Calendar c = Calendar.getInstance();
-		int hour = c.get(Calendar.HOUR_OF_DAY);
-		int min = c.get(Calendar.MINUTE);
-		int hourmin = Integer.valueOf(String.valueOf(hour)+String.valueOf(min));
 
-		String username = System.getProperty("user.name");
-
-		//		freqpath = "D:\\"+username+"\\"+ appcode;
-		freqpath = "C:\\Script_Essentials\\"+username+"\\"+ appcode;
-		File theDir = new File(freqpath);
-
-		if(!theDir.exists())
-		{
-			try {
-				theDir.mkdirs();
-				XMLWriter.runFrequency(appcode, 0);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		freq = new BufferedReader(new FileReader(freqpath+"\\"+appcode+".txt"));
-		prevTime = freq.readLine();
-		String previousTime = String.valueOf(prevTime);
-
-		SimpleDateFormat sd4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar c4 = Calendar.getInstance();
-
-		runStartTime = sd4.format((c4.getTime()));
-		//*************Frequency & Time Condition******************//
-
-		prevTimeSec = Integer.parseInt(prevTime);
-
-		try{
-			prevTimeSec = Integer.parseInt(previousTime);
-		}catch(Exception e)
-		{
-			prevTimeSec = 0;
-		}
-
-		int currentTimeSec = c.get(Calendar.HOUR_OF_DAY)*60*60 + c.get(Calendar.MINUTE)*60 + c.get(Calendar.SECOND);
-
-
-		if((currentTimeSec - prevTimeSec < 0) || (currentTimeSec - prevTimeSec >= 00)) //3500
-		{
-			TaskKill.stopappium();
-			try{Thread.sleep(2000);
-			FileUtils.cleanDirectory(new File("C:/Users/quality/AppData/Local/Temp/"));}
-			catch(Exception e)
-			{System.out.println("Temp files are not available.");}
-			try
+		try
 			{
 				TaskKill.startappium();                   
 				Thread.sleep(5000);
-				XMLWriter.runFrequency(appcode, currentTimeSec);
 				DesiredCapabilities capabilities = new DesiredCapabilities();
 				capabilities.setCapability("deviceName", "Moto");
 				capabilities.setCapability("udid", "emulator-5554");
@@ -247,20 +93,9 @@ public class TataMotorsConnectDemo {
 			}
 			catch(Exception e)
 			{
-				UIManager.put("OptionPane.minimumSize",new Dimension(400,400));
-				UIManager.put("OptionPane.messageFont", new Font("System", Font.PLAIN, 40));
-				UIManager.put("OptionPane.buttonFont", new Font("System", Font.PLAIN, 30));
-				JOptionPane.showMessageDialog(null, "DEVICE DISCONNECTED - QKMOB476","ALERT", JOptionPane.PLAIN_MESSAGE);
-				String show="Follow below Steps:\n 1) Reconnect the device via USB. 2) Close current batch execution & start it again.";
+				e.printStackTrace();
 			//	VerifyPopup.Popup(show);
-			}
-		}
-		else
-		{
-			TaskKill.stopappium();
-			TaskKill.javaw();
-			System.out.println("Don't Execute");
-		}
+			}	
 
 	}
 	
@@ -280,7 +115,7 @@ public class TataMotorsConnectDemo {
 
 	}
 
-	@Test
+	/*@Test
 
 	public void test02Select_Country_Page() throws Exception
 
@@ -458,5 +293,5 @@ public class TataMotorsConnectDemo {
 		Thread.sleep(2000);
 		System.exit(0);
 
-	}
+	}*/
 } 
