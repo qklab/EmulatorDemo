@@ -44,7 +44,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TataMotorsConnectDemo {
 
 	private static AndroidDriver driver;
-	private static String url = "http://127.0.0.1:4731/wd/hub";
+	private static String url = "http://127.0.0.1:4723/wd/hub";
     
 
 //	private static BtmWebServiceProxy pushRA = new BtmWebServiceProxy();
@@ -228,7 +228,7 @@ public class TataMotorsConnectDemo {
 			{System.out.println("Temp files are not available.");}
 			try
 			{
-				TaskKill.startappium();
+				//TaskKill.startappium();
 				Thread.sleep(5000);
 				XMLWriter.runFrequency(appcode, currentTimeSec);
 				DesiredCapabilities capabilities = new DesiredCapabilities();
