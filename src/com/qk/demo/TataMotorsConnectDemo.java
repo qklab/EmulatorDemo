@@ -102,7 +102,7 @@ public class TataMotorsConnectDemo {
 	
 	
 
-	@Test
+/*	@Test
 	public void test01Home_Page() throws Exception
 	{
 
@@ -114,7 +114,7 @@ public class TataMotorsConnectDemo {
 		}
 
 
-	}
+	}*/
 
 	/*@Test
 
