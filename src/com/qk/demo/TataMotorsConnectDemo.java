@@ -225,14 +225,14 @@ public class TataMotorsConnectDemo {
 
 		if((currentTimeSec - prevTimeSec < 0) || (currentTimeSec - prevTimeSec >= 00)) //3500
 		{
-			//TaskKill.stopappium();
+			TaskKill.stopappium();
 			try{Thread.sleep(2000);
 			FileUtils.cleanDirectory(new File("C:/Users/quality/AppData/Local/Temp/"));}
 			catch(Exception e)
 			{System.out.println("Temp files are not available.");}
 			try
 			{
-				//TaskKill.startappium();                   
+				TaskKill.startappium();                   
 				Thread.sleep(5000);
 				XMLWriter.runFrequency(appcode, currentTimeSec);
 				DesiredCapabilities capabilities = new DesiredCapabilities();

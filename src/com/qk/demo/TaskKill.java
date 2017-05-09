@@ -67,7 +67,7 @@ public class TaskKill {
 	}
 	
 	public static void startappium() throws ExecuteException, IOException{
-		CommandLine command = new CommandLine("C:/Program Files (x86)/Appium/node.exe"); // 64-bit
+/*		CommandLine command = new CommandLine("C:/Program Files (x86)/Appium/node.exe"); // 64-bit
 //		CommandLine command = new CommandLine("C:/Program Files/Appium/node.exe"); // 32-bit
 		command.addArgument("C:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js", false);
 //		command.addArgument("C:/Program Files/Appium/node_modules/appium/bin/Appium.js", false);
@@ -76,7 +76,7 @@ public class TaskKill {
 		command.addArgument("--port", false);
 		command.addArgument("4731");
 		command.addArgument("--bootstrap-port", false); 
-		command.addArgument("5731");
+		command.addArgument("5731");a
 		command.addArgument("--chromedriver-port", false);
 		command.addArgument("6731");
 		command.addArgument("--session-override", true);
@@ -85,8 +85,9 @@ public class TaskKill {
 		executor.setExitValue(1);
 		executor.execute(command, resultHandler);
 //		System.setProperty("http.keepAlive", "false");
-		
-		
+*/		
+		Runtime.getRuntime().exec("appium");
+		System.out.println("Start Appium");
 	}
 	
 	public static void clearTemp() throws ExecuteException, IOException{
