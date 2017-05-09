@@ -20,7 +20,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.qk.demo.TataMotorsConnectDemo</mainClass>
+							<mainClass>com.qk.demo.Loop</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
