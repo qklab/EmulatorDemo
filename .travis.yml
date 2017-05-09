@@ -56,4 +56,5 @@ script:
   - cd ../
   - cd target
   - ls
-  - java -jar EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+  - echo "$TRAVIS_BUILD_DIR"
+  - java -cp ".:$TRAVIS_BUILD_DIR/lib/*.jar" -jar $TRAVIS_BUILD_DIR/target/EmulatorDemo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
